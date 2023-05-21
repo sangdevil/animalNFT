@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "gallery",
     "personal_page",
+    "accounts",
 ]
 
 MIDDLEWARE = [

@@ -33,3 +33,16 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
+    
+def home(request):
+    return render(
+        request,
+        '../personal_pages/index.html',
+    )
+    
+def gallery(request):
+    return render(
+        request,
+        'gallery/blog.html'
+    )    
+        
