@@ -1444,6 +1444,16 @@ h1, h2, h3, h4, h5, h6 {
   padding: 10px !important;
 }
 
+
+.icon-small {
+  color: #e66686;
+  font-size: 12px; /* Adjust the size as per your requirement */
+}
+.icon-large {
+  color: #e66686;
+  font-size: 36px; /* Adjust the size as per your requirement */
+}
+
 /* ------------------------------- */
 /* Cardbox Heading
 ---------------------------------- */
