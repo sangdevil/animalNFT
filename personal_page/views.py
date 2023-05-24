@@ -11,3 +11,4 @@ def home(request):
         'single_pages/index.html',
     )
     
+

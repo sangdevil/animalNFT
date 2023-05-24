@@ -27,3 +27,6 @@ def login(request) :
         'form' : form,
     }
     return render(request, 'single_pages/login.html', context)
+
+def create_account(request):
+    return render(request, 'single_pages/login copy.html')

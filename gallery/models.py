@@ -4,6 +4,7 @@ from django.db import models
 
 from accounts.models import Nation
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -53,3 +54,4 @@ class Nft_object(models.Model):
     
     def belongs_human(self):
         return self.category.name == "WithHuman"
+    
