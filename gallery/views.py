@@ -1,24 +1,15 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
-from .models import Post
-
-
-# Create your views here.
-# def index(request):
-#     posts = Post.objects.all().order_by('-pk')
-#     return render(
-#         request,
-#         'blog/post_list.html',
-#         {
-#             'posts': posts,
-#         }
-#     )
+from django.views.generic import ListView, DetailView, CreateView
+from .models import Nft_object, Category
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class PostList(ListView):
-    model = Post
+    model = Nft_object
     ordering = '-pk'
-    template_name = 'gallery/blog.html'
-
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        return context
 
 # def single_post_page(request, pk):
 #     posts = Post.objects.get(pk=pk)
@@ -31,13 +22,13 @@ class PostList(ListView):
 #     )
 
 class PostDetail(DetailView):
-    model = Post
+    model = Nft_object
     template_name = 'blog/post_detail.html'
     
 def home(request):
     return render(
         request,
-        '../personal_pages/index.html',
+        '/',
     )
     
 def gallery(request):

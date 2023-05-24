@@ -21,7 +21,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 urlpatterns = [
-    path('', views.gallery, name='gallery'),
-    path('gallery/', views.gallery, name='gallery'),
+    path('', views.PostList.as_view()),
     path('login/', include('accounts.urls')),
 ]
