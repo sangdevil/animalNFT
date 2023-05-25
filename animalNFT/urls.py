@@ -24,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("gallery/", include("gallery.urls")),
     path('login/', include('accounts.urls')),
+    path('NFT/', include('NFT.urls')),
     path("", include("personal_page.urls")),
 
 ]
