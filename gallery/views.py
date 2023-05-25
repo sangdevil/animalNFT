@@ -41,3 +41,6 @@ def gallery(request):
     )    
         
 
+def my_page(request):
+
+    return render(request, 'single_pages/my_page.html')
