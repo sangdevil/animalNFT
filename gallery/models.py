@@ -2,9 +2,7 @@
 import pycountry
 from django.db import models
 
-from accounts.models import Nation
-from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
+from accounts.models import Nation, NftUser
 
 # Create your models here.
 
@@ -30,9 +28,10 @@ class Nft_object(models.Model):
     description = models.TextField(default="")
     # todo!, nft = ?
     
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(NftUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     def __str__(self):
         return self.title

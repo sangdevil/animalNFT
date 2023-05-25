@@ -194,17 +194,18 @@
               <h3>Log in to enter</h3>
               <form
                 class="row login_form"
-                action="contact_process.php"
+                action="{% url 'accounts:login' %}"
                 method="post"
                 id="contactForm"
                 novalidate="novalidate"
               >
+                {% csrf_token %}
                 <div class="col-md-12 form-group">
                   <input
                     type="text"
                     class="form-control"
-                    id="name"
-                    name="name"
+                    id="username"
+                    name="username"
                     placeholder="Username"
                     onfocus="this.placeholder = ''"
                     onblur="this.placeholder = 'Username'"
@@ -212,10 +213,10 @@
                 </div>
                 <div class="col-md-12 form-group">
                   <input
-                    type="text"
+                    type="password"
                     class="form-control"
-                    id="name"
-                    name="name"
+                    id="password"
+                    name="password"
                     placeholder="Password"
                     onfocus="this.placeholder = ''"
                     onblur="this.placeholder = 'Password'"

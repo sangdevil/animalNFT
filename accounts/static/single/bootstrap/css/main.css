@@ -1203,6 +1203,13 @@ h1, h2, h3, h4, h5, h6 {
   .navbar-expand-lg > .container-fluid {
     padding: 0px 15px; } }
 
+.select-wrapper {
+  max-height: 200px; /* Set the desired height for the dropdown */
+  overflow-y: auto;
+}
+    
+
+
 /* banner area css
 ============================================================================================ */
 .banner-area {

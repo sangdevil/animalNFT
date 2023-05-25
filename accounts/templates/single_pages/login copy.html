@@ -86,6 +86,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   </head>
 
   <body>
@@ -191,43 +196,108 @@
                 id="contactForm"
                 novalidate="novalidate"
               >
+                {% csrf_token %}
                 <div class="col-md-12 form-group">
                   <input
                     type="text"
                     class="form-control"
-                    id="name"
-                    name="name"
+                    id="username"
+                    name="username"
                     placeholder="Username"
-                    onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Username'"
+                    required
                   />
                 </div>
                 <div class="col-md-12 form-group">
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    id="name"
-                    name="name"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+                <div class="col-md-12 form-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
                     placeholder="Password"
-                    onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Password'"
+                    required
                   />
                 </div>
                 <div class="col-md-12 form-group">
                   <input
-                    type="text"
+                    type="password"
                     class="form-control"
-                    id="name"
-                    name="name"
+                    id="password_check"
+                    name="password_check"
                     placeholder="Password Check"
-                    onfocus="this.placeholder = ''"
-                    onblur="this.placeholder = 'Password_check'"
+                    required
                   />
                 </div>
                 <div class="col-md-12 form-group">
-                  <button type="submit" value="submit" class="primary-btn">
-                    Register
-                  </button>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label class="col-form-label" for="user_image"
+                        >Head Image:</label
+                      >
+                    </div>
+                    <div class="col-md-8">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="user_image"
+                        name="user_image"
+                        accept="image/*"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="user_image">Birth Date :</label>
+                    </div>
+                    <div class="col-md-8">
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="birth_date"
+                        name="birth_date"
+                        placeholder="Birth Date"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 form-group">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="user_image">Nation :</label>
+                    </div>
+
+                    <div class="col-md-8">
+                      <div class="select-wrapper">
+                        <select
+                          class="form-control"
+                          id="nation"
+                          name="nation"
+                          required
+                        >
+                          <option selected>Korea, Republic of</option>
+                          {% for code, name in nation_choices %}
+                          <option value="{{ code }}">{{ name }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 form-group">
+                  <button type="submit" class="primary-btn">Register</button>
                 </div>
               </form>
             </div>
