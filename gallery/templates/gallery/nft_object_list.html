@@ -66,7 +66,7 @@
 <div class="container">
   <div class="row">
     {% for x in nft_object_list %}
-    <div class="col-lg-4" id="main_gallery">
+    <div class="col-lg-6" id="main_gallery" style="margin-bottom: 100px">
       <div class="cardbox shadow-lg bg-white">
         <div class="cardbox-heading">
           <!-- START dropdown-->
@@ -86,11 +86,11 @@
                   alt="User"
               /></a>
             </div>
-            <div class="media-body">
-              <p>Benjamin</p>
+            <div class="categories_details">
+              <p class="card-name">{{ x.owner.username }}</p>
               <small
                 ><span
-                  ><i class="icon ion-md-time"></i> 10 hours ago</span
+                  ><i class="icon ion-md-time"></i>{{ x.created_at }}</span
                 ></small
               >
             </div>
@@ -107,20 +107,13 @@
             <li>
               <a href="#"
                 ><i
-                  style="font-size: 24px; color: #e66686 margin le"
+                  style="font-size: 24px; color: #e66686; margin-left: 30px"
                   class="bi bi-suit-heart"
                 ></i
               ></a>
             </li>
             <li>
-              <a>242</a>
-            </li>
-            <li>
-              <a href="#"
-                ><img
-                  src="{% static 'blog/bootstrap/img/r8.jpg' %}"
-                  class="img-fluid rounded-circle"
-              /></a>
+              <a><p style="font-size: 18px; color: #000000">242</p></a>
             </li>
           </ul>
         </div>
@@ -128,7 +121,7 @@
       </div>
       <!--/ cardbox -->
     </div>
-    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    {% if forloop.counter|divisibleby:2 and not forloop.last %}
   </div>
   <div class="row">
     {% endif %} {% endfor %}

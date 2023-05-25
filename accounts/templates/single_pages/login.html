@@ -123,18 +123,18 @@
               id="navbarSupportedContent"
             >
               <ul class="nav navbar-nav menu_nav ml-auto">
-                {% comment %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
-                {% endcomment %}
-
                 <li class="nav-item active">
-                  <a class="nav-link" href="/gallery/">Gallery</a>
+                  <a class="nav-link" href="{% url 'gallery:post_list' %}"
+                    >Gallery</a
+                  >
                 </li>
-
                 <li class="nav-item">
-                  <a class="nav-link" href="/login/">My Page</a>
+                  <a class="nav-link" href="{% url 'accounts:login' %}"
+                    >My Page</a
+                  >
                 </li>
               </ul>
             </div>
@@ -170,14 +170,20 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="login_box_img">
-              <img class="img-fluid" src="img/login.jpg" alt="" />
+              <img
+                class="img-fluid"
+                src="{% static 'single/bootstrap/img/people_pet/about-3.jpg' %}"
+                alt=""
+              />
               <div class="hover">
                 <h4>New to our website?</h4>
                 <p>
                   There are advances being made in science and technology
                   everyday, and a good example of this is the
                 </p>
-                <a class="primary-btn" href="registration.html"
+                <a
+                  class="primary-btn"
+                  href="{% url 'accounts:create_account' %}"
                   >Create an Account</a
                 >
               </div>
@@ -188,18 +194,17 @@
               <h3>Log in to enter</h3>
               <form
                 class="row login_form"
-                action="/login/"
+                action="contact_process.php"
                 method="post"
                 id="contactForm"
                 novalidate="novalidate"
               >
-                {% csrf_token %}
                 <div class="col-md-12 form-group">
                   <input
                     type="text"
                     class="form-control"
-                    id="username"
-                    name="username"
+                    id="name"
+                    name="name"
                     placeholder="Username"
                     onfocus="this.placeholder = ''"
                     onblur="this.placeholder = 'Username'"
@@ -209,8 +214,8 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="password"
-                    name="password"
+                    id="name"
+                    name="name"
                     placeholder="Password"
                     onfocus="this.placeholder = ''"
                     onblur="this.placeholder = 'Password'"

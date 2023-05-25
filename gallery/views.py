@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from .models import Nft_object, Category
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib.auth import login as auth_login # login함수와 이름이 겹쳐서
+from django.contrib.auth.forms import AuthenticationForm
 
 class PostList(ListView):
     model = Nft_object
@@ -37,3 +40,4 @@ def gallery(request):
         'gallery/blog.html'
     )    
         
+
