@@ -27,7 +27,7 @@ class Category(models.Model):
 class Nft_object(models.Model):
     title = models.CharField(max_length=255)
     nft_image = models.ImageField(upload_to='images/nft_images/%Y/%m/%d/')
-    description = models.TextField(default='no')
+    description = models.TextField(default="")
     # todo!, nft = ?
     
     created_at = models.DateTimeField(auto_now_add=True)

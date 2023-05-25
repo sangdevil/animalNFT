@@ -23,6 +23,6 @@ from . import views
 app_name = 'gallery'
 urlpatterns = [
     path('', views.PostList.as_view(), name = "post_list"),
-
+    path("create_post/", views.PostCreate.as_view())
 
 ]

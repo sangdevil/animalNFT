@@ -28,6 +28,11 @@ class PostDetail(DetailView):
     model = Nft_object
     template_name = 'blog/post_detail.html'
     
+class PostCreate(CreateView):
+    model = Nft_object
+    fields = ['title', 'nft_image', 'description', 'category']
+    
+
 def home(request):
     return render(
         request,
