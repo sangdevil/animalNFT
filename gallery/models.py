@@ -4,7 +4,6 @@ from django.db import models
 
 from accounts.models import Nation
 from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -29,6 +28,7 @@ class Nft_object(models.Model):
     nft_image = models.ImageField(upload_to='images/nft_images/%Y/%m/%d/')
     description = models.TextField(default='no')
     # todo!, nft = ?
+    
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

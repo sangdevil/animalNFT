@@ -1,6 +1,6 @@
 import pycountry
 from django.db import models
-
+# from gallery.models import Nft_object
 from django.contrib.auth.models import AbstractUser
 
 
@@ -20,5 +20,6 @@ class Nation(models.Model):
 #     birth_date = models.DateField()
 #     nation = models.ForeignKey(Nation, on_delete=models.CASCADE)
     
-    
+#     def __str__(self):
+#         return self.username
 #     # todo! user wallet

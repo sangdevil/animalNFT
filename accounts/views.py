@@ -30,3 +30,6 @@ def login(request) :
 
 def create_account(request):
     return render(request, 'single_pages/login copy.html')
+
+def my_page(request):
+    return render(request, 'single_pages/my_page.html')
