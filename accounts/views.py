@@ -12,9 +12,9 @@ def login(request) :
         
         # data는 forms.form 두번쨰 인자이므로 data = 은 생략 가능
         # print(request)
-        print(request.POST)
+        # print(request.POST)
         form = AuthenticationForm(request, data = request.POST) # 먼저 request 인자를 받아야함
-        print(form)
+        # print(form)
         if form.is_valid() :
             # print("hey")
             # 세션 CREATE/ form.get_user는 User 객체 반환
