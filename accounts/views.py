@@ -1,13 +1,15 @@
 from django.shortcuts import render
 
 import pycountry
-
 from .models import Nation, NftUser
+from gallery.models import Nft_object, Category
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login # login함수와 이름이 겹쳐서
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import check_password
+from django.shortcuts import redirect
+
 
 
 # # Create your views here.
@@ -33,6 +35,8 @@ from django.contrib.auth.hashers import check_password
 #     }
 #     return render(request, 'single_pages/login.html', context)
 def login(request):
+
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -68,3 +72,16 @@ def create_account(request):
         }
     return render(request, 'single_pages/login copy.html', context)
 
+def decide(request):
+    # if request.user.is_authenticated:
+    #     # User is logged in, redirect to my_page
+    #     return redirect('accounts:my_page')
+    # else:
+    #     # User is not logged in, redirect to login
+    #     return redirect('accounts:login')
+    print("fuck you my passsge")
+    return redirect('/account/login')
+
+
+
+    

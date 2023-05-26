@@ -5335,6 +5335,39 @@ label {
   color: #ffffff; /* Change the text color to your desired value */
   /* Add any other desired styles */
 }
+.collection-title {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin-top: 100px;
+}
+.collection-line {
+  border: none;
+  border-top: 2px solid #333;
+  margin-top: 50px;
+  margin-bottom: 200px;
+}
+.user_image_frame {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user_image_frame img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.category-content-black {
+  font-size: 24px; /* Change the font size to your desired value */
+  font-family: 'Permanent Marker', cursive;
+  font-weight: lighter;
+  text-transform: lowercase;
+  color: black; /* Change the text color to your desired value */
+  /* Add any other desired styles */
+}
 
 .card-name {
   font-size: 24px; /* Change the font size to your desired value */

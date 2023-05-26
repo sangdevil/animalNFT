@@ -1,63 +1,120 @@
 {% extends 'gallery/base.html' %} {% load static %} {% block main_area %}
+<!-- My Collection -->
+
+<h2 class="category-content-black">My Collection</h2>
 <section class="blog_categorie_area">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4">
-        <div class="categories_post">
+      <div class="col-lg-6">
+        <div class="user_image_frame">
           <img
-            src="{% static 'blog/bootstrap/img/dogs/001.jpg' %}"
-            alt="post"
+            src="{% static 'blog/bootstrap/img/github.png' %}"
+            alt="User Image"
           />
-          <div class="categories_details">
-            <div class="categories_text">
-              <a href="blog-details.html">
-                <h1 class="category-name">Dog</h1>
-              </a>
-              <div class="border_line"></div>
-              <h2 class="category-content">Fancy dogs!</h2>
-            </div>
+        </div>
+
+        <div class="categories_details">
+          <div class="categories_text">
+            <h1 class="collection-wallet">My Wallet</h1>
+
+            <a href="wallet.html">
+              <h1 class="collection-wallet"># 0xa4b13cde09...</h1>
+            </a>
+            <div class="border_line"></div>
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="categories_post">
-          <img
-            src="{% static 'blog/bootstrap/img/cats/002.jpg' %}"
-            alt="post"
-          />
-          <div class="categories_details">
-            <div class="categories_text">
-              <a href="blog-details.html">
-                <h1 class="category-name">Cat</h1>
-              </a>
-              <div class="border_line"></div>
-              <h2 class="category-content">Cute cats!</h2>
+      <div class="col-lg-6">
+        <div class="login_form_inner">
+          <h3>Post your Pet!</h3>
+          <form
+            class="row login_form"
+            action="contact_process.php"
+            method="post"
+            id="contactForm"
+            novalidate="novalidate"
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %}
+            <div class="col-md-12 form-group">
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="col-form-label" for="head_title"
+                    >Title :
+                  </label>
+                </div>
+                <div class="col-md-8">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="head_title"
+                    name="head_title"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="categories_post">
-          <img
-            src="{% static 'blog/bootstrap/img/people_pet/about-2.jpg' %}"
-            style="width: 100%; height: 80%"
-            alt="post"
-          />
-          <div class="categories_details">
-            <div class="categories_text">
-              <a href="blog-details.html">
-                <h1 class="category-name">Together</h1>
-              </a>
-              <div class="border_line"></div>
-              <h2 class="category-content">Pet and I</h2>
+            <div class="col-md-12 form-group">
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="col-form-label" for="user_image">Image</label>
+                </div>
+                <div class="col-md-8">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="user_image"
+                    name="user_image"
+                    accept="image/*"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+            <div class="col-md-12 form-group">
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="col-form-label" for="user_image"
+                    >Category</label
+                  >
+                </div>
+                <div class="col-md-8">
+                  <select
+                    class="form-control"
+                    id="user_image"
+                    name="user_image"
+                    required
+                  >
+                    <option value="cat">Cat</option>
+                    <option value="dog">Dog</option>
+                    <option value="with_human">With Human</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 form-group"></div>
+            <div class="col-md-4 form-group text-center">
+              <button type="submit" class="primary-btn">Post</button>
+            </div>
+            <div class="col-md-4 form-group"></div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </section>
 <!--================Blog Categorie Area =================-->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="collection-title">My Collection</h2>
+        <hr class="collection-line" />
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ==============================================
 	    Hero
@@ -66,7 +123,7 @@
 <div class="container">
   <div class="row">
     {% for x in nft_object_list %}
-    <div class="col-lg-6" id="main_gallery" style="margin-bottom: 100px">
+    <div class="col-lg-6" id="my_gallery" style="margin-bottom: 100px">
       <div class="cardbox shadow-lg bg-white">
         <div class="cardbox-heading">
           <!-- START dropdown-->
