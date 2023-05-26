@@ -6,12 +6,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login as auth_login # login함수와 이름이 겹쳐서
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse, reverse_lazy
-
-class PostList(ListView):
+class PostList1(ListView):
     model = Nft_object
-    ordering = '-pk'
+    ordering = '-pk'    
+    template_name = "gallery/nft_object_list.html"
+
+class PostList2(ListView):
+    model = Nft_object
+    ordering = '-pk'    
+    template_name = "gallery/my_page.html"
+
     def get_context_data(self, **kwargs):
-        context = super(PostList, self).get_context_data()
+        context = super(PostList2, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         return context
 
@@ -71,5 +77,5 @@ def gallery(request):
         
 
 def my_page(request):
-
+    print("fuck you")
     return render(request, 'single_pages/my_page.html')

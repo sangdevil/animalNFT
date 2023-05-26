@@ -14,7 +14,10 @@ app_name = 'accounts'
 urlpatterns = [
     # path('', user_passes_test(check_user_login, login_url='login')(views.my_page), name='my_page'),
     path('create_account', views.create_account, name = 'create_account'),
-    path('', views.login, name = "login"),
+    path('login/', views.login, name = "login"),
+    path('', views.decide),
+    # path('my_page/', views.PostList.as_view(), name = "my_page"),
     path('gallery/', include('gallery.urls'))
+    
     # 다른 URL 패턴들...
 ]

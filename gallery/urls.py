@@ -22,11 +22,6 @@ from django.conf.urls.static import static
 from . import views
 app_name = 'gallery'
 urlpatterns = [
-    path('', views.PostList.as_view(), name = "post_list"),
-    path("create_post/", views.PostCreate.as_view()),
-    path('my_page/', views.my_page, name='my_page'),  # URL pattern for 'my_page/'
-
-    
-
-
+    path('', views.PostList1.as_view(), name = "post_list"),
+    path('my_page/', views.PostList2.as_view(), name = "my_list")
 ]

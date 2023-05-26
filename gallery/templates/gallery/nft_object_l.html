@@ -1,0 +1,135 @@
+{% extends 'gallery/base.html' %} {% load static %} {% block main_area %}
+<section class="blog_categorie_area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="categories_post">
+          <img
+            src="{% static 'blog/bootstrap/img/dogs/001.jpg' %}"
+            alt="post"
+          />
+          <div class="categories_details">
+            <div class="categories_text">
+              <a href="blog-details.html">
+                <h1 class="category-name">Dog12</h1>
+              </a>
+              <div class="border_line"></div>
+              <h2 class="category-content">Fancy dogs!</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="categories_post">
+          <img
+            src="{% static 'blog/bootstrap/img/cats/002.jpg' %}"
+            alt="post"
+          />
+          <div class="categories_details">
+            <div class="categories_text">
+              <a href="blog-details.html">
+                <h1 class="category-name">Cat</h1>
+              </a>
+              <div class="border_line"></div>
+              <h2 class="category-content">Cute cats!</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="categories_post">
+          <img
+            src="{% static 'blog/bootstrap/img/people_pet/about-2.jpg' %}"
+            style="width: 100%; height: 80%"
+            alt="post"
+          />
+          <div class="categories_details">
+            <div class="categories_text">
+              <a href="blog-details.html">
+                <h1 class="category-name">Together</h1>
+              </a>
+              <div class="border_line"></div>
+              <h2 class="category-content">Pet and I</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================Blog Categorie Area =================-->
+
+<!-- ==============================================
+	    Hero
+	    =============================================== -->
+
+<div class="container">
+  <div class="row">
+    {% for x in nft_object_list %}
+    <div class="col-lg-6" id="main_gallery" style="margin-bottom: 100px">
+      <div class="cardbox shadow-lg bg-white">
+        <div class="cardbox-heading">
+          <!-- START dropdown-->
+          <div class="dropdown float-right">
+            <img
+              src="{% static 'blog/bootstrap/img/nations/AE.gif' %}"
+              style="width: 60px; height: 40px"
+            />
+          </div>
+          <!--/ dropdown -->
+          <div class="media m-0">
+            <div class="d-flex mr-3">
+              <a href=""
+                ><img
+                  class="img-fluid rounded-circle"
+                  src="{% static 'blog/bootstrap/img/user.png' %}"
+                  alt="User"
+              /></a>
+            </div>
+            <div class="categories_details">
+              <p class="card-name">{{ x.title }}</p>
+              <small
+                ><span
+                  ><i class="icon ion-md-time"></i>{{ x.created_at }}</span
+                ></small
+              >
+            </div>
+          </div>
+          <!--/ media -->
+        </div>
+        <!--/ cardbox-heading -->
+        <div class="cardbox-item">
+          <img class="img-fluid" src="{{ x.nft_image.url }}" alt="Image" />
+        </div>
+        <!--/ cardbox-item -->
+        <div class="cardbox-base">
+          <ul>
+            <li>
+              <a href="#"
+                ><i
+                  style="font-size: 24px; color: #e66686; margin-left: 30px"
+                  class="bi bi-suit-heart"
+                ></i
+              ></a>
+            </li>
+            <li>
+              <a><p style="font-size: 18px; color: #000000">242</p></a>
+            </li>
+          </ul>
+        </div>
+        <!--/ cardbox-like -->
+      </div>
+      <!--/ cardbox -->
+    </div>
+    {% if forloop.counter|divisibleby:2 and not forloop.last %}
+  </div>
+  <div class="row">
+    {% endif %} {% endfor %}
+    <!--/ col-lg-3 -->
+  </div>
+
+  <!--/ row -->
+</div>
+<!--/ container -->
+
+{% endblock %}

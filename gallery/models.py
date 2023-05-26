@@ -25,13 +25,16 @@ class Category(models.Model):
 class Nft_object(models.Model):
     title = models.CharField(max_length=255)
     nft_image = models.ImageField(upload_to='images/nft_images/%Y/%m/%d/')
-    description = models.TextField(default="")
+    description = models.TextField(default='no')
+    
     # todo!, nft = ?
     
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # user가 owner 연결
     owner = models.ForeignKey(NftUser, on_delete=models.CASCADE)
+    
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     def __str__(self):
         return self.title
