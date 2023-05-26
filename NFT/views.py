@@ -225,7 +225,9 @@ def create_wallet(request) :
     
 def mint_token(request):
       
-      
+  print(request.POST)
+  print(request.FILES)
+  
   #save image into IPFS via NFT.storage
   files = {
     'image': open('image.jpg', 'rb'),
@@ -234,7 +236,7 @@ def mint_token(request):
 
   response = requests.post('https://api.nft.storage/store', files=files)
   if not response.status_code ==200:
-    return render(request, 'gallery')
+    return render(request, 'gallery:post_list')
 
   IPFS_data = response.json()
   token_uri = "ipfs.io/ipfs/" + IPFS_data.value.cid
@@ -251,4 +253,4 @@ def mint_token(request):
   data = {"to": request.user.wallet, "id": randomID, "uri": token_uri}
   
   response = requests.post('https://kip17-api.klaytnapi.com/v2/contract/animal-ntf-kaist5/token', headers=headers, data=data, auth=(access_key_id, secret_access_key))
-  
+  return render(request, 'gallery:post_list')

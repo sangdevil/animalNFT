@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.contrib.auth import login as auth_login # login함수와 이름이 겹쳐서
 from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse, reverse_lazy
 
 class PostList(ListView):
     model = Nft_object
@@ -30,8 +31,31 @@ class PostDetail(DetailView):
     
 class PostCreate(CreateView):
     model = Nft_object
-    fields = ['title', 'nft_image', 'description', 'category']
-    
+    fields = ['title', 'nft_image', 'description', 'category', "owner"]
+    success_url = reverse_lazy('NFT:mint_token')
+    # def get_success_url(self):
+    #     # return reverse('NFT:mint_token')
+    #     print(self)
+    #     return render(self.object,'NFT:mint_token')
+    # mint_token(title, Nft_object, des)
+    def form_valid(self, form):
+        title = form.cleaned_data['title']
+        nft_image = form.cleaned_data['nft_image']
+        description = form.cleaned_data['description']
+        # category = form.cleaned_data['category']
+        # owner = form.cleaned_data['owner']
+        
+        obj = form.save(commit=False)
+        obj.image = nft_image
+        obj.save()
+        
+        
+        self.request.session['title'] = title
+        # self.request.session['nft_image'] = nft_image
+        self.request.session['description'] = description
+        # self.request.session['category'] = category
+        # self.request.session['owner'] = owner
+        return super().form_valid(form)
 
 def home(request):
     return render(
