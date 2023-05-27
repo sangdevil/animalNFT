@@ -27,9 +27,9 @@
       <div class="col-lg-6">
         <div class="login_form_inner">
           <h3>Post your Pet!</h3>
+
           <form
             class="row login_form"
-            action=""
             method="post"
             id="contactForm"
             novalidate="novalidate"
@@ -39,16 +39,14 @@
             <div class="col-md-12 form-group">
               <div class="row">
                 <div class="col-md-4">
-                  <label class="col-form-label" for="head_title"
-                    >Title :
-                  </label>
+                  <label class="col-form-label" for="title">Title : </label>
                 </div>
                 <div class="col-md-8">
                   <input
                     type="text"
                     class="form-control"
-                    id="head_title"
-                    name="head_title"
+                    id="title"
+                    name="title"
                     required
                   />
                 </div>
@@ -57,14 +55,14 @@
             <div class="col-md-12 form-group">
               <div class="row">
                 <div class="col-md-4">
-                  <label class="col-form-label" for="user_image">Image</label>
+                  <label class="col-form-label" for="nft_image">Image</label>
                 </div>
                 <div class="col-md-8">
                   <input
                     type="file"
                     class="form-control"
-                    id="user_image"
-                    name="user_image"
+                    id="nft_image"
+                    name="nft_image"
                     accept="image/*"
                     required
                   />
@@ -74,20 +72,18 @@
             <div class="col-md-12 form-group">
               <div class="row">
                 <div class="col-md-4">
-                  <label class="col-form-label" for="user_image"
-                    >Category</label
-                  >
+                  <label class="col-form-label" for="category">Category</label>
                 </div>
                 <div class="col-md-8">
                   <select
                     class="form-control"
-                    id="user_image"
-                    name="user_image"
+                    id="category"
+                    name="category"
                     required
                   >
-                    <option value="cat">Cat</option>
-                    <option value="dog">Dog</option>
-                    <option value="with_human">With Human</option>
+                    <option value="1">Dog</option>
+                    <option value="2">Cat</option>
+                    <option value="3">With Human</option>
                   </select>
                 </div>
               </div>

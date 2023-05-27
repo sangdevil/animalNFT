@@ -26,8 +26,13 @@ class NftUser(AbstractUser):
     # Custom fields and methods for the user
     user_image = models.ImageField(upload_to='images/user_images/%Y/%m/%d/', null=True, default='default_image.jpg')
     birth_date = models.DateField(null=True, default=datetime.date.today)
-    nation = models.CharField(max_length=2, choices=[], null=True)
-
+    password1 = models.CharField(max_length=20, default =1)
+    password2 = models.CharField(max_length=20, default=1)
+    # nation = models.CharField(max_length=2, choices=[], null=True)
+    nation = models.CharField(max_length=3, null=True)
+    NFT_wallet_addr = models.CharField(max_length=200, unique=True, null=True)
+    NFT_private_key = models.CharField(max_length=200,  null=True)
+    NFT_public_key = models.CharField(max_length=200,  null=True)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._meta.get_field('nation').choices = self.get_country_choices()

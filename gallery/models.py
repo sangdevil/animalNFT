@@ -36,6 +36,9 @@ class Nft_object(models.Model):
     owner = models.ForeignKey(NftUser, on_delete=models.CASCADE)
     
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tx_hash = models.CharField(max_length=255, null=True)
+    token_URI = models.CharField(max_length=255, null=True)
+    
     def __str__(self):
         return self.title
     

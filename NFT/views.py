@@ -3,7 +3,7 @@ import requests
 import json
 import random
 import math
-
+from django.http import JsonResponse
 """
 const CaverExtKAS = require("caver-js-ext-kas");
 const originalCaver_ = require("caver-js");
@@ -195,16 +195,18 @@ module.exports = {
 chain_id = 1001
 access_key_id = "KASKHT32FUV2LSVC00OZ2DHM";
 secret_access_key = "XM-hoBODxZCZdpgvJqeWl7LdG2JpGX4Ny5YB16Qa";
+account_pool_krn = "krn:8217:wallet:56ba73e4-b905-4cf2-aa8f-c4ec16d68430:account-pool:AnimalNFT"
 # Create your views here.
 def create_wallet(request) : 
   global chain_id, access_key_id, secret_access_key
   if request.method=='POST' :
     headers = {
-      'x-chain-id': '{chain-id}',
+      'x-chain-id': {chain_id},
+      'x-krn':{account_pool_krn}
     }
     response = requests.post('https://wallet-api.klaytnapi.com/v2/account', headers=headers, auth=(access_key_id, secret_access_key))
-    print(response.json())
-    return # 로그인 성공시 메인페이지 이동
+    # print(response.json())
+    return JsonResponse(response.json())
   else :
     pass
   context = {
