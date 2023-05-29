@@ -59,73 +59,70 @@ class PostList2(ListView):
         form = NFT_form(request.POST, request.FILES)
         
         if form.is_valid():
-            temp_object = form.save(commit=False)
-            # form.owner = request.user
-            # NFT_object_ = Nft_object.objects.get(owner_id=request.user)
-            # print(NFT_object_)
-            # NFT_object_.owner = request.user
-            # NFT_object_.save()
-            
-            temp_object.owner = request.user
-            temp_object.save()
-            # print(NFT_object)
-            
-            
-            # saved_obj = NFT_object.objects.get(pk = obj.pk)
-            
-            
-            NFT_username = str(request.user)
-            
-            current_date = str(datetime.today().strftime('%Y\\%m\\%d'))
-            img_name =request.FILES['nft_image'].name.replace(" ", "_")
-            NFT_image = open(MEDIA_ROOT +"\\images\\nft_images\\"+current_date+"\\"+ request.FILES['nft_image'].name.replace(" ", "_"),'rb')
-            # test = open("../media/images/nft_images/2023/05/26/우아한_청년들_릴레이_채용_데이터_분석_1EXhOuQ.png", 'rb')
-            # print(test)
-            meta_data = {"image":None,"name":"AnimalNFT","description":"Test","properties":{"owner":NFT_username}}
-            headers = {"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDZjZTZkODZBYTkwOTA4Q2UxMkU1QWMzRGU5MzRkNDVmNTRBOTgyOTgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY4NDY1MzgzNTkxNiwibmFtZSI6IkFuaW1hbE5GVCJ9.v3BSPEDt3fH3ZD2F2qTXqQa6IUcp5qnpA3MHXtn5QrA"}
-            files = {
-                'image': (img_name, NFT_image),
-                'meta': (None, json.dumps(meta_data))
-                }
-            # print(files)
-            # files = {
-            #     'meta': {"name":"AnimalNFT","image":NFT_image_data, "properties":{"videoClip": null}}}
-            # print(json.parse(files))
-
-            response = requests.post('https://api.nft.storage/store', files=files, headers=headers)
-            # if not response.status_code ==200:
-            #     return render(request, 'gallery:post_list')
-            IPFS_data = response.json()
-            # print(IPFS_data)
-            token_uri = IPFS_data["value"]['url']
-
-
-            #klaytn token minting
-            # global chain_id, access_key_id, secret_access_key
-            chain_id = "1001"
-            access_key_id = "KASKHT32FUV2LSVC00OZ2DHM"
-            secret_access_key = "XM-hoBODxZCZdpgvJqeWl7LdG2JpGX4Ny5YB16Qa"
-            
-            headers = {
-                'x-chain-id': chain_id,
-                'Content-Type': 'application/json',
+            try:
+                temp_object = form.save(commit=False)
+                temp_object.owner = request.user
+                temp_object.save()
+                # print(NFT_object)
                 
-            }
-            randomID = str(hex(random.randint(0, sys.maxsize)))
-            # data = {"to": "0x20b718A535251B4DceA83a0B79EF12723835A898", "id": randomID, "uri": token_uri}
-            # print(randomID)
-            # print(token_uri)
-            NFT_user_model_data = NftUser.objects.get(username = request.user)
-            NFT_wallet_addr =NFT_user_model_data.NFT_wallet_addr
-            data = f'{{"to": "{NFT_wallet_addr}", "id": "{randomID}", "uri": "{token_uri}"}}'
-            # print(data)
-            response = requests.post('https://kip17-api.klaytnapi.com/v2/contract/animal-ntf-kaist5/token', headers=headers, data=data, auth=(access_key_id, secret_access_key))
-            # print(response.json())
-            NFT_object_saved = Nft_object.objects.get(owner_id=request.user)
-            NFT_object_saved.tx_hash = response.json()["transactionHash"]
-            NFT_object_saved.token_URI = token_uri
-            NFT_object_saved.save()
-            return render(request, "gallery/nft_object_l.html")
+                
+                # saved_obj = NFT_object.objects.get(pk = obj.pk)
+                
+                
+                NFT_username = str(request.user)
+                
+                current_date = str(datetime.today().strftime('%Y\\%m\\%d'))
+                img_name =request.FILES['nft_image'].name.replace(" ", "_")
+                NFT_image = open(MEDIA_ROOT +"\\images\\nft_images\\"+current_date+"\\"+ request.FILES['nft_image'].name.replace(" ", "_"),'rb')
+                # test = open("../media/images/nft_images/2023/05/26/우아한_청년들_릴레이_채용_데이터_분석_1EXhOuQ.png", 'rb')
+                # print(test)
+                meta_data = {"image":None,"name":"AnimalNFT","description":"Test","properties":{"owner":NFT_username}}
+                headers = {"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDZjZTZkODZBYTkwOTA4Q2UxMkU1QWMzRGU5MzRkNDVmNTRBOTgyOTgiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY4NDY1MzgzNTkxNiwibmFtZSI6IkFuaW1hbE5GVCJ9.v3BSPEDt3fH3ZD2F2qTXqQa6IUcp5qnpA3MHXtn5QrA"}
+                files = {
+                    'image': (img_name, NFT_image),
+                    'meta': (None, json.dumps(meta_data))
+                    }
+                # print(files)
+                # files = {
+                #     'meta': {"name":"AnimalNFT","image":NFT_image_data, "properties":{"videoClip": null}}}
+                # print(json.parse(files))
+
+                response = requests.post('https://api.nft.storage/store', files=files, headers=headers)
+                # if not response.status_code ==200:
+                #     return render(request, 'gallery:post_list')
+                IPFS_data = response.json()
+                # print(IPFS_data)
+                token_uri = IPFS_data["value"]['url']
+
+
+                #klaytn token minting
+                # global chain_id, access_key_id, secret_access_key
+                chain_id = "1001"
+                access_key_id = "KASKHT32FUV2LSVC00OZ2DHM"
+                secret_access_key = "XM-hoBODxZCZdpgvJqeWl7LdG2JpGX4Ny5YB16Qa"
+                
+                headers = {
+                    'x-chain-id': chain_id,
+                    'Content-Type': 'application/json',
+                    
+                }
+                randomID = str(hex(random.randint(0, sys.maxsize)))
+                # data = {"to": "0x20b718A535251B4DceA83a0B79EF12723835A898", "id": randomID, "uri": token_uri}
+                # print(randomID)
+                # print(token_uri)
+                NFT_user_model_data = NftUser.objects.get(username = NFT_username)
+                NFT_wallet_addr =NFT_user_model_data.NFT_wallet_addr
+                data = f'{{"to": "{NFT_wallet_addr}", "id": "{randomID}", "uri": "{token_uri}"}}'
+                # print(data)
+                response = requests.post('https://kip17-api.klaytnapi.com/v2/contract/animal-ntf-kaist5/token', headers=headers, data=data, auth=(access_key_id, secret_access_key))
+                # print(response.json())
+                
+                temp_object.tx_hash = response.json()["transactionHash"]
+                temp_object.token_URI = token_uri
+                temp_object.save()
+                return render(request, "gallery/nft_object_l.html")
+            except:
+                return JsonResponse({'error': 'NFT minting failed'})
         
 
 # def single_post_page(request, pk):
