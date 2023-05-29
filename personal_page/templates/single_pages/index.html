@@ -18,7 +18,7 @@
                 style="width: 60px; height: 40px"
               />
             </div>
-
+  
             <!--/ dropdown -->
             <div class="media m-0">
               <div class="d-flex mr-3">
@@ -27,7 +27,6 @@
                     class="img-fluid rounded-circle"
                     src="{% static 'blog/bootstrap/img/user.png' %}"
                     alt="User"
-                    style="width: 60px; height: 60px"
                 /></a>
               </div>
               <div class="categories_details">
@@ -48,37 +47,38 @@
           <!--/ cardbox-item -->
           <div class="cardbox-base">
             <ul>
+              
               <li>
-                <span href="#">
+                <span  onclick={% if user.is_authenticated %}"toggleLike({{ x.id }})" {% else %} "toggleLikeLogout()" {%endif%}>
                   {% if user in x.like_users.all %}
                   <i
                     id="like-icon-{{ x.id }}"
-                    style="font-size: 24px; margin-left: 30px"
+                    style="font-size: 24px; margin-left: 30px; margin-right: 30px"
                     class="bi bi-suit-heart-fill"
                   ></i>
                   {% else %}
                   <i
                     id="like-icon-{{ x.id }}"
-                    style="font-size: 24px; margin-left: 30px"
+                    style="font-size: 24px; margin-left: 30px; margin-right: 30px"
                     class="bi bi-suit-heart"
                   ></i>
                   {% endif%}
                 </span>
               </li>
               <li>
-                <a
+                <span
                   ><span id="like-count-{{ x.id }}" style="font-size: 24px"
                     >{{ x.total_likes }}</span
-                  ></a
+                  ></
                 >
               </li>
               <li>
-                <a href="#" onclick="copyToClipboard_uri('{{ x.token_URI }}')"
+                <span  onclick="copyToClipboard_uri('{{ x.token_URI }}')"
                   ><i
                     style="font-size: 24px; color: gray; margin-left: 30px"
                     class="bi bi-hash"
                     >Token URI</i
-                  ></a
+                  ></
                 >
               </li>
             </ul>
@@ -93,39 +93,98 @@
       {% endif %} {% endfor %}
       <!--/ col-lg-3 -->
     </div>
-  </section>
-  <!-- end product Area -->
-  <!-- Start brand Area -->
-  <section class="brand-area section_gap">
-    <div class="container">
-      <div class="row">
-        <a class="col single-img" href="#">
-          <img
-            class="img-fluid d-block mx-auto"
-            style="width: 200px; height: 200px"
-            src="{% static 'single/bootstrap/img/kaist.png' %}"
-            alt=""
-          />
-        </a>
-        <a class="col single-img" href="#">
-          <img
-            class="img-fluid d-block mx-auto"
-            style="width: 200px; height: 200px"
-            src="{% static 'single/bootstrap/img/klaytn.png' %}"
-            alt=""
-          />
-        </a>
-        <a class="col single-img" href="#">
-          <img
-            class="img-fluid d-block mx-auto"
-            style="width: 200px; height: 200px"
-            src="{% static 'single/bootstrap/img/yonsei.png' %}"
-            alt=""
-          />
-        </a>
-      </div>
-    </div>
-  </section>
-  <!-- End brand Area -->
-</body>
-{% endblock%}
+  
+    <!--/ row -->
+  </div>
+  <!--/ container -->
+  <script>
+    function copyToClipboard(text) {
+      // Create a temporary input element
+      const input = document.createElement("input");
+      input.value = text;
+      document.body.appendChild(input);
+  
+      // Select and copy the text
+      input.select();
+      document.execCommand("copy");
+  
+      // Remove the temporary input element
+      document.body.removeChild(input);
+  
+      // Show a confirmation message or perform any other desired action
+      alert("Wallet address copied to clipboard!");
+    }
+    function copyToClipboard_uri(text) {
+      // Create a temporary input element
+      const input = document.createElement("input");
+      input.value = text;
+      document.body.appendChild(input);
+  
+      // Select and copy the text
+      input.select();
+      document.execCommand("copy");
+  
+      // Remove the temporary input element
+      document.body.removeChild(input);
+  
+      // Show a confirmation message or perform any other desired action
+      alert("Token URI copied to clipboard!");
+    }
+    function getCookie(cookieName) {
+      var cookieValue = null;
+      
+      if (document.cookie) {
+        var array = document.cookie.split(escape(cookieName) + "=");
+  
+        if (array.length >= 2) {
+          var arraySub = array[1].split(";");
+  
+          cookieValue = unescape(arraySub[0]);
+        }
+      }
+      console.log(cookieValue);
+      return cookieValue;
+    }
+  
+    function toggleLikeLogout() {
+      
+      return alert("You have to login to leave a like!");
+    }
+  
+    function toggleLike(nftObjectId) {
+      const likeIcon = document.getElementById(`like-icon-${nftObjectId}`);
+      const likeCount = document.getElementById(`like-count-${nftObjectId}`);
+  
+      // Toggle the like icon
+      likeIcon.classList.toggle("bi-suit-heart-fill");
+      likeIcon.classList.toggle("bi-suit-heart");
+  
+      // Update the like count
+      const currentCount = parseInt(likeCount.innerText);
+  
+      // Send AJAX request to the server to update the like status
+  
+      const url = `../../gallery/update-like/${nftObjectId}/`;
+      //console.log(url);
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"), // Include the CSRF token
+        },
+      })
+        .then((response) => {
+          //response.json();
+          if (likeIcon.classList.contains("bi-suit-heart-fill")) {
+            likeCount.innerText = currentCount + 1;
+          } else {
+            likeCount.innerText = currentCount - 1;
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  </script>
+  {% endblock %}
+  
