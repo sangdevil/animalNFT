@@ -106,25 +106,38 @@
         <!--/ cardbox-item -->
         <div class="cardbox-base">
           <ul>
+            
             <li>
-              <a href="#" onclick="toggleLike({{ x.id }})">
+              <span  onclick={% if user.is_authenticated %}"toggleLike({{ x.id }})" {% else %} "toggleLikeLogout()" {%endif%}>
+                {% if user in x.like_users.all %}
                 <i
                   id="like-icon-{{ x.id }}"
-                  style="font-size: 24px; margin-left: 30px"
-                  class="bi {% if x.user_has_liked(request.user) %}bi-suit-heart-fill{% else %}bi-suit-heart{% endif %}"
+                  style="font-size: 24px; margin-left: 30px; margin-right: 30px"
+                  class="bi bi-suit-heart-fill"
                 ></i>
-              </a>
+                {% else %}
+                <i
+                  id="like-icon-{{ x.id }}"
+                  style="font-size: 24px; margin-left: 30px; margin-right: 30px"
+                  class="bi bi-suit-heart"
+                ></i>
+                {% endif%}
+              </span>
             </li>
             <li>
-              <span id="like-count-{{ x.id }}">{{ x.total_likes }}</span>
+              <span
+                ><span id="like-count-{{ x.id }}" style="font-size: 24px"
+                  >{{ x.total_likes }}</span
+                ></
+              >
             </li>
             <li>
-              <a href="#" onclick="copyToClipboard_uri('{{ x.token_URI }}')"
+              <span  onclick="copyToClipboard_uri('{{ x.token_URI }}')"
                 ><i
                   style="font-size: 24px; color: gray; margin-left: 30px"
                   class="bi bi-hash"
                   >Token URI</i
-                ></a
+                ></
               >
             </li>
           </ul>
@@ -176,6 +189,27 @@
     // Show a confirmation message or perform any other desired action
     alert("Token URI copied to clipboard!");
   }
+  function getCookie(cookieName) {
+    var cookieValue = null;
+    
+    if (document.cookie) {
+      var array = document.cookie.split(escape(cookieName) + "=");
+
+      if (array.length >= 2) {
+        var arraySub = array[1].split(";");
+
+        cookieValue = unescape(arraySub[0]);
+      }
+    }
+    console.log(cookieValue);
+    return cookieValue;
+  }
+
+  function toggleLikeLogout() {
+    
+    return alert("You have to login to leave a like!");
+  }
+
   function toggleLike(nftObjectId) {
     const likeIcon = document.getElementById(`like-icon-${nftObjectId}`);
     const likeCount = document.getElementById(`like-count-${nftObjectId}`);
@@ -186,15 +220,11 @@
 
     // Update the like count
     const currentCount = parseInt(likeCount.innerText);
-    if (likeIcon.classList.contains("bi-suit-heart-fill")) {
-      likeCount.innerText = currentCount + 1;
-    } else {
-      likeCount.innerText = currentCount - 1;
-    }
 
     // Send AJAX request to the server to update the like status
 
-    const url = `/update-like/${nftObjectId}/`;
+    const url = `../../gallery/update-like/${nftObjectId}/`;
+    //console.log(url);
     fetch(url, {
       method: "POST",
       headers: {
@@ -202,7 +232,14 @@
         "X-CSRFToken": getCookie("csrftoken"), // Include the CSRF token
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        //response.json();
+        if (likeIcon.classList.contains("bi-suit-heart-fill")) {
+          likeCount.innerText = currentCount + 1;
+        } else {
+          likeCount.innerText = currentCount - 1;
+        }
+      })
       .catch((error) => {
         console.error("Error:", error);
       });

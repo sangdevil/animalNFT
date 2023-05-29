@@ -1,155 +1,97 @@
 {% extends 'single_pages/base.html' %} {% load static %} {% block hot_feed %}
 <body>
-
-
   <!-- start product Area -->
-  <section class="owl-carousel active-product-area section_gap">
+  <section class="container">
     <!-- single product slide -->
-    <div class="single-product-slider">
-      <div class="container">
-        <div class="row">
-          <!-- single product -->
-          <div class="col-lg-3 col-md-6">
-            <div class="single-product">
+    <div class="row">
+      {% comment %}
+      <div>Hello!!!</div>
+
+      {% endcomment %} {% for x in new_object_list %}
+      <div class="col-lg-6" id="main_gallery" style="margin-bottom: 100px">
+        <div class="cardbox shadow-lg bg-white">
+          <div class="cardbox-heading">
+            <!-- START dropdown-->
+            <div class="dropdown float-right">
               <img
-                class="img-fluid"
-                src="{% static 'single/bootstrap/img/dogs/001.jpg' %}"
-                alt=""
+                src="{{ x.get_nation_img_url }}"
+                style="width: 60px; height: 40px"
               />
-              <div class="product-details">
-                <h6>addidas New Hammer sole for Sports person</h6>
-                <div class="price">
-                  <h6>$150.00</h6>
-                  <h6 class="l-through">$210.00</h6>
-                </div>
-                <div class="prd-bottom">
-                  <a href="" class="social-info">
-                    <span class="ti-bag"></span>
-                    <p class="hover-text">add to bag</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-heart"></span>
-                    <p class="hover-text">Wishlist</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-sync"></span>
-                    <p class="hover-text">compare</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-move"></span>
-                    <p class="hover-text">view more</p>
-                  </a>
-                </div>
+            </div>
+
+            <!--/ dropdown -->
+            <div class="media m-0">
+              <div class="d-flex mr-3">
+                <a href=""
+                  ><img
+                    class="img-fluid rounded-circle"
+                    src="{% static 'blog/bootstrap/img/user.png' %}"
+                    alt="User"
+                    style="width: 60px; height: 60px"
+                /></a>
+              </div>
+              <div class="categories_details">
+                <p class="card-name">{{ x.title }}</p>
+                <small
+                  ><span
+                    ><i class="icon ion-md-time"></i>{{ x.created_at }}</span
+                  ></small
+                >
               </div>
             </div>
+            <!--/ media -->
           </div>
-          <!-- single product -->
-          <div class="col-lg-3 col-md-6">
-            <div class="single-product">
-              <img
-                class="img-fluid"
-                src="{% static 'single/bootstrap/img/dogs/002.jpg' %}"
-                alt=""
-              />
-              <div class="product-details">
-                <h6>addidas New Hammer sole for Sports person</h6>
-                <div class="price">
-                  <h6>$150.00</h6>
-                  <h6 class="l-through">$210.00</h6>
-                </div>
-                <div class="prd-bottom">
-                  <a href="" class="social-info">
-                    <span class="ti-bag"></span>
-                    <p class="hover-text">add to bag</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-heart"></span>
-                    <p class="hover-text">Wishlist</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-sync"></span>
-                    <p class="hover-text">compare</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-move"></span>
-                    <p class="hover-text">view more</p>
-                  </a>
-                </div>
-              </div>
-            </div>
+          <!--/ cardbox-heading -->
+          <div class="cardbox-item">
+            <img class="img-fluid" src="{{ x.nft_image.url }}" alt="Image" />
           </div>
-          <!-- single product -->
-          <div class="col-lg-3 col-md-6">
-            <div class="single-product">
-              <img
-                class="img-fluid"
-                src="{% static 'single/bootstrap/img/dogs/003.jpg' %}"
-                alt=""
-              />
-              <div class="product-details">
-                <h6>addidas New Hammer sole for Sports person</h6>
-                <div class="price">
-                  <h6>$150.00</h6>
-                  <h6 class="l-through">$210.00</h6>
-                </div>
-                <div class="prd-bottom">
-                  <a href="" class="social-info">
-                    <span class="ti-bag"></span>
-                    <p class="hover-text">add to bag</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-heart"></span>
-                    <p class="hover-text">Wishlist</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-sync"></span>
-                    <p class="hover-text">compare</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-move"></span>
-                    <p class="hover-text">view more</p>
-                  </a>
-                </div>
-              </div>
-            </div>
+          <!--/ cardbox-item -->
+          <div class="cardbox-base">
+            <ul>
+              <li>
+                <span href="#">
+                  {% if user in x.like_users.all %}
+                  <i
+                    id="like-icon-{{ x.id }}"
+                    style="font-size: 24px; margin-left: 30px"
+                    class="bi bi-suit-heart-fill"
+                  ></i>
+                  {% else %}
+                  <i
+                    id="like-icon-{{ x.id }}"
+                    style="font-size: 24px; margin-left: 30px"
+                    class="bi bi-suit-heart"
+                  ></i>
+                  {% endif%}
+                </span>
+              </li>
+              <li>
+                <a
+                  ><span id="like-count-{{ x.id }}" style="font-size: 24px"
+                    >{{ x.total_likes }}</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="#" onclick="copyToClipboard_uri('{{ x.token_URI }}')"
+                  ><i
+                    style="font-size: 24px; color: gray; margin-left: 30px"
+                    class="bi bi-hash"
+                    >Token URI</i
+                  ></a
+                >
+              </li>
+            </ul>
           </div>
-          <!-- single product -->
-          <div class="col-lg-3 col-md-6">
-            <div class="single-product">
-              <img
-                class="img-fluid"
-                src="{% static 'single/bootstrap/img/dogs/004.jpg' %}"
-                alt=""
-              />
-              <div class="product-details">
-                <h6>addidas New Hammer sole for Sports person</h6>
-                <div class="price">
-                  <h6>$150.00</h6>
-                  <h6 class="l-through">$210.00</h6>
-                </div>
-                <div class="prd-bottom">
-                  <a href="" class="social-info">
-                    <span class="ti-bag"></span>
-                    <p class="hover-text">add to bag</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-heart"></span>
-                    <p class="hover-text">Wishlist</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-sync"></span>
-                    <p class="hover-text">compare</p>
-                  </a>
-                  <a href="" class="social-info">
-                    <span class="lnr lnr-move"></span>
-                    <p class="hover-text">view more</p>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!--/ cardbox-like -->
         </div>
+        <!--/ cardbox -->
       </div>
+      {% if forloop.counter|divisibleby:2 and not forloop.last %}
+    </div>
+    <div class="row">
+      {% endif %} {% endfor %}
+      <!--/ col-lg-3 -->
     </div>
   </section>
   <!-- end product Area -->

@@ -144,19 +144,22 @@ class PostDetail(DetailView):
     
 
 def update_like(request, nft_object_id):
+    # print(request.POST)
+    # print(nft_object_id)
     if request.method == 'POST' and request.user.is_authenticated:
         nft_object = Nft_object.objects.get(id=nft_object_id)
         user = request.user
         
-        if nft_object.likes.filter(id=user.id).exists():
+        if nft_object.like_users.filter(id=user.id).exists():
             # User has already liked, remove the like
-            nft_object.likes.remove(user)
+            nft_object.like_users.remove(user)
             is_liked = False
         else:
             # User has not liked, add the like
-            nft_object.likes.add(user)
+            nft_object.like_users.add(user)
             is_liked = True
-        
+        nft_object.save()
+        print(nft_object)
         return JsonResponse({'is_liked': is_liked})
     
     return JsonResponse({'error': 'Invalid request'})

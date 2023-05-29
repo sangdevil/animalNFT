@@ -49,10 +49,10 @@ class Nft_object(models.Model):
     
     @property
     def total_likes(self):
-        return self.likes.count()
+        return self.like_users.count()
 
     def user_has_liked(self, user):
-        return self.likes.filter(user=user).exists()
+        return self.like_users.filter(user=user).exists()
     
     def get_owner_img_url(self):
         return self.owner.user_image.url
