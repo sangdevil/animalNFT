@@ -44,6 +44,10 @@ class NftUser(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+    def get_nft_addr(self):
+        # print(self.NFT_wallet_addr)
+        return str(self.NFT_wallet_addr)[:10]
 
     # todo! user wallet
     

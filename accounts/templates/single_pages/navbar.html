@@ -12,7 +12,7 @@
             src="{% static 'single/bootstrap/img/logo.jpg' %}"
             style="width: 80px; height: 80px"
             alt=""
-          />연수리와 넙죽이</a
+          />Animal NFT</a
         >
         <button
           class="navbar-toggler"
@@ -33,19 +33,26 @@
           id="navbarSupportedContent"
         >
           <ul class="nav navbar-nav menu_nav ml-auto">
-            {% comment %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'home' %}">Home</a>
-            </li>
-            {% endcomment %}
-
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
             <li class="nav-item active">
               <a class="nav-link" href="/gallery/">Gallery</a>
             </li>
 
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/gallery/my_page">My Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/account/logout">Logout</a>
+            </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link" href="/account/">My Page</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/account/">Login</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -61,11 +68,13 @@
       class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end"
     >
       <div class="col-first">
-        <h1>Blog Page</h1>
+        <h1>My page</h1>
+        {% comment %}
         <nav class="d-flex align-items-center">
           <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
           <a href="category.html">Login</a>
         </nav>
+        {% endcomment %}
       </div>
     </div>
   </div>

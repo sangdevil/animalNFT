@@ -24,5 +24,5 @@ app_name = 'gallery'
 urlpatterns = [
     path('', views.PostList1.as_view(), name = "post_list"),
     path('my_page/', views.PostList2.as_view(), name = "my_list"),
-    
+    path('update-like/<int:nft_object_id>/', views.update_like, name = "likes")
 ]

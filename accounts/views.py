@@ -5,7 +5,7 @@ from .models import Nation, NftUser
 from gallery.models import Nft_object, Category
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login # login함수와 이름이 겹쳐서
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import redirect
@@ -67,7 +67,9 @@ def login(request):
             user = NftUser.objects.get(username=username)
             if check_password(password, user.password):
                 auth_login(request, user)
-                return redirect('gallery:post_list')  # Redirect to the main page upon successful login
+                return redirect('gallery:post_list')
+            else:
+                return redirect('accounts:login')
         except NftUser.DoesNotExist:
             pass
 
@@ -79,6 +81,11 @@ def login(request):
         'error_message': error_message,
     }
     return render(request, 'single_pages/login.html', context)
+def logout(request):
+    
+    auth_logout(request)
+    return redirect('/')
+    # return render(request,'login.html')
 
 def create_account(request):
     nation_choices = [(country.alpha_2, country.name) for country in pycountry.countries]

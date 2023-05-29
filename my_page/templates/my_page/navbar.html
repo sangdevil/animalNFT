@@ -7,7 +7,7 @@
     >
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <a class="navbar-brand logo_h" href="index.html"
+        <a class="navbar-brand logo_h" href="/"
           ><img
             src="{% static 'single/bootstrap/img/logo.jpg' %}"
             style="width: 80px; height: 80px"
@@ -37,11 +37,18 @@
             <li class="nav-item active">
               <a class="nav-link" href="/gallery/">Gallery</a>
             </li>
+
             {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/gallery/my_page">My Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/account/logout">Logout</a>
+            </li>
+            {% else %}
             <li class="nav-item">
               <a class="nav-link" href="/account/">My Page</a>
             </li>
-            {% else %}
             <li class="nav-item">
               <a class="nav-link" href="/account/">Login</a>
             </li>

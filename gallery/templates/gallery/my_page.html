@@ -1,7 +1,5 @@
 {% extends 'gallery/base.html' %} {% load static %} {% block main_area %}
 <!-- My Collection -->
-
-<h2 class="category-content-black">My Collection</h2>
 <section class="blog_categorie_area">
   <div class="container">
     <div class="row">
@@ -15,10 +13,17 @@
 
         <div class="categories_details">
           <div class="categories_text">
-            <h1 class="collection-wallet">My Wallet</h1>
+            <h1 class="collection-wallet">
+              {{ request.user.username }}'s Wallet
+            </h1>
 
-            <a href="wallet.html">
-              <h1 class="collection-wallet"># 0xa4b13cde09...</h1>
+            <a
+              href="#"
+              onclick="copyToClipboard('{{ request.user.NFT_wallet_addr }}')"
+            >
+              <h1 class="collection-wallet">
+                # {{ request.user.get_nft_addr }}...
+              </h1>
             </a>
             <div class="border_line"></div>
           </div>
@@ -118,14 +123,14 @@
 
 <div class="container">
   <div class="row">
-    {% for x in nft_object_list %}
+    {% for x in user_nfts %}
     <div class="col-lg-6" id="my_gallery" style="margin-bottom: 100px">
       <div class="cardbox shadow-lg bg-white">
         <div class="cardbox-heading">
           <!-- START dropdown-->
           <div class="dropdown float-right">
             <img
-              src="{% static 'blog/bootstrap/img/nations/AE.gif' %}"
+              src="{{ x.get_nation_img_url }}"
               style="width: 60px; height: 40px"
             />
           </div>
@@ -168,6 +173,15 @@
             <li>
               <a><p style="font-size: 18px; color: #000000">242</p></a>
             </li>
+            <li>
+              <a href="#" onclick="copyToClipboard_uri('{{ x.token_URI }}')"
+                ><i
+                  style="font-size: 24px; color: gray; margin-left: 30px"
+                  class="bi bi-hash"
+                  >Token URI</i
+                ></a
+              >
+            </li>
           </ul>
         </div>
         <!--/ cardbox-like -->
@@ -183,6 +197,41 @@
 
   <!--/ row -->
 </div>
+
+<script>
+  function copyToClipboard(text) {
+    // Create a temporary input element
+    const input = document.createElement("input");
+    input.value = text;
+    document.body.appendChild(input);
+
+    // Select and copy the text
+    input.select();
+    document.execCommand("copy");
+
+    // Remove the temporary input element
+    document.body.removeChild(input);
+
+    // Show a confirmation message or perform any other desired action
+    alert("Wallet address copied to clipboard!");
+  }
+  function copyToClipboard_uri(text) {
+    // Create a temporary input element
+    const input = document.createElement("input");
+    input.value = text;
+    document.body.appendChild(input);
+
+    // Select and copy the text
+    input.select();
+    document.execCommand("copy");
+
+    // Remove the temporary input element
+    document.body.removeChild(input);
+
+    // Show a confirmation message or perform any other desired action
+    alert("Token URI copied to clipboard!");
+  }
+</script>
 <!--/ container -->
 
 {% endblock %}
